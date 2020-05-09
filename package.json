@@ -15,10 +15,6 @@
   ],
   "author": "Korenskoy <korenskoy@gmail.com>",
   "license": "MIT",
-  "files": [
-    "emoji.json",
-    "emoji-data.json"
-  ],
   "bugs": {
     "url": "https://github.com/korenskoy/emoji-data-ios/issues"
   },
