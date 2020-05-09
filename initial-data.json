@@ -1,0 +1,83 @@
+{
+    "categoryId": {
+        "Symbols": {
+            "id": 6,
+            "position": 7
+        },
+        "Activities": {
+            "id": 3,
+            "position": 4
+        },
+        "Flags": {
+            "id": 7,
+            "position": 8
+        },
+        "Travel & Places": {
+            "id": 4,
+            "position": 5
+        },
+        "Food & Drink": {
+            "id": 2,
+            "position": 3
+        },
+        "Animals & Nature": {
+            "id": 1,
+            "position": 2
+        },
+        "People & Body": {
+            "id": 0,
+            "position": 1
+        },
+        "Objects": {
+            "id": 5,
+            "position": 6
+        },
+        "Smileys & Emotion": {
+            "id": 0,
+            "position": 0
+        }
+    },
+    "categories": [
+    {
+      "id": "people",
+      "name": "Smileys & People",
+      "emojis": []
+    },
+    {
+      "id": "nature",
+      "name": "Animals & Nature",
+      "emojis": []
+    },
+    {
+      "id": "foods",
+      "name": "Food & Drink",
+      "emojis": []
+    },
+    {
+      "id": "activity",
+      "name": "Activities",
+      "emojis": []
+    },
+    {
+      "id": "places",
+      "name": "Travel & Places",
+      "emojis": []
+    },
+    {
+      "id": "objects",
+      "name": "Objects",
+      "emojis": []
+    },
+    {
+      "id": "symbols",
+      "name": "Symbols",
+      "emojis": []
+    },
+    {
+      "id": "flags",
+      "name": "Flags",
+      "emojis": []
+    }
+  ],
+  "emojis": {}
+}
