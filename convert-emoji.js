@@ -39,6 +39,10 @@ const emojiPresentationSelectorInMiddleForce = [
     '0034-fe0f-20e3', '0035-fe0f-20e3', '0036-fe0f-20e3', '0037-fe0f-20e3', '0038-fe0f-20e3', '0039-fe0f-20e3',
 ];
 
+const addPresentationSelector = [
+    '26a1'
+]
+
 data.sort((a, b) => {
     const as = initialData.categoryId[a.category].position;
     const bs = initialData.categoryId[b.category].position;
@@ -110,6 +114,19 @@ emojiPresentationSelectorInMiddleForce.forEach((code) => {
     fs.exists(`./img-apple-160/${code}.png`, (exists) => {
         if (exists) {
             fs.copyFileSync(`./img-apple-160/${code}.png`, `./img-apple-160/${code.replace(/(^0+|-fe0f)/gi, '')}.png`);
+        }
+    });
+});
+
+addPresentationSelector.forEach((code) => {
+    fs.exists(`./img-apple-64/${code}.png`, (exists) => {
+        if (exists) {
+            fs.copyFileSync(`./img-apple-64/${code}.png`, `./img-apple-64/${code}-fe0f.png`);
+        }
+    });
+    fs.exists(`./img-apple-160/${code}.png`, (exists) => {
+        if (exists) {
+            fs.copyFileSync(`./img-apple-160/${code}.png`, `./img-apple-160/${code}-fe0f.png`);
         }
     });
 });
