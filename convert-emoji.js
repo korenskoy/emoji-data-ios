@@ -33,6 +33,12 @@ const emojiPresentationSelectorForce = [
     '1f6e5', '1f6e9', '1f6f0', '1f6f3',
 ];
 
+// https://unicodey.com/js-emoji/build/emoji-data/build/data_variations.txt
+const emojiPresentationSelectorInMiddleForce = [
+    '0023-fe0f-20e3', '002a-fe0f-20e3', '0030-fe0f-20e3', '0031-fe0f-20e3', '0032-fe0f-20e3', '0033-fe0f-20e3',
+    '0034-fe0f-20e3', '0035-fe0f-20e3', '0036-fe0f-20e3', '0037-fe0f-20e3', '0038-fe0f-20e3', '0039-fe0f-20e3',
+];
+
 data.sort((a, b) => {
     const as = initialData.categoryId[a.category].position;
     const bs = initialData.categoryId[b.category].position;
@@ -91,6 +97,19 @@ emojiPresentationSelectorForce.forEach((code) => {
     fs.exists(`./img-apple-160/${code}-fe0f.png`, (exists) => {
         if (exists) {
             fs.copyFileSync(`./img-apple-160/${code}-fe0f.png`, `./img-apple-160/${code}.png`);
+        }
+    });
+});
+
+emojiPresentationSelectorInMiddleForce.forEach((code) => {
+    fs.exists(`./img-apple-64/${code}.png`, (exists) => {
+        if (exists) {
+            fs.copyFileSync(`./img-apple-64/${code}.png`, `./img-apple-64/${code.replace(/(^0+|-fe0f)/gi, '')}.png`);
+        }
+    });
+    fs.exists(`./img-apple-160/${code}.png`, (exists) => {
+        if (exists) {
+            fs.copyFileSync(`./img-apple-160/${code}.png`, `./img-apple-160/${code.replace(/(^0+|-fe0f)/gi, '')}.png`);
         }
     });
 });
