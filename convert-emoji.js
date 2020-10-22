@@ -108,12 +108,12 @@ emojiPresentationSelectorForce.forEach((code) => {
 emojiPresentationSelectorInMiddleForce.forEach((code) => {
     fs.exists(`./img-apple-64/${code}.png`, (exists) => {
         if (exists) {
-            fs.copyFileSync(`./img-apple-64/${code}.png`, `./img-apple-64/${code.replace(/(^0+|-fe0f)/gi, '')}.png`);
+            fs.copyFileSync(`./img-apple-64/${code}.png`, `./img-apple-64/${code.replace(/(-fe0f)/gi, '')}.png`);
         }
     });
     fs.exists(`./img-apple-160/${code}.png`, (exists) => {
         if (exists) {
-            fs.copyFileSync(`./img-apple-160/${code}.png`, `./img-apple-160/${code.replace(/(^0+|-fe0f)/gi, '')}.png`);
+            fs.copyFileSync(`./img-apple-160/${code}.png`, `./img-apple-160/${code.replace(/(-fe0f)/gi, '')}.png`);
         }
     });
 });
