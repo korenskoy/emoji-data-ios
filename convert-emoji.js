@@ -124,7 +124,6 @@ addPresentationSelector.forEach((code) => {
 
 fs.readdirSync(normalFolder).forEach(file => {
     if (file.match(vs16RegExp) !== null) {
-        console.log(file)
         fs.copyFileSync(`${normalFolder}/${file}`, `${normalFolder}/${file.replace(vs16RegExp, '')}`);
     }
 });
