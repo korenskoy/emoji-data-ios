@@ -3,6 +3,10 @@ const initialData = require('./initial-data.json');
 const data = require('./emoji.json').filter(emoji => {
     return initialData.categoryId[emoji.category] !== undefined || !emoji.has_img_apple
 });
+const normalFolder = './img-apple-64';
+const hqFolder = './img-apple-160';
+const vs16RegExp = /-fe0f/g;
+
 const emojiPresentationSelectorForce = [
     '0023', '002a', '0030', '0031', '0032', '0033', '0034', '0035', '0036', '0037', '0038', '0039', '00a9', '00ae',
     '203c', '2049', '2122', '2139', '2194', '2195', '2196', '2197', '2198', '2199', '21a9', '21aa', '231a', '231b',
@@ -105,19 +109,6 @@ emojiPresentationSelectorForce.forEach((code) => {
     });
 });
 
-emojiPresentationSelectorInMiddleForce.forEach((code) => {
-    fs.exists(`./img-apple-64/${code}.png`, (exists) => {
-        if (exists) {
-            fs.copyFileSync(`./img-apple-64/${code}.png`, `./img-apple-64/${code.replace(/(-fe0f)/gi, '')}.png`);
-        }
-    });
-    fs.exists(`./img-apple-160/${code}.png`, (exists) => {
-        if (exists) {
-            fs.copyFileSync(`./img-apple-160/${code}.png`, `./img-apple-160/${code.replace(/(-fe0f)/gi, '')}.png`);
-        }
-    });
-});
-
 addPresentationSelector.forEach((code) => {
     fs.exists(`./img-apple-64/${code}.png`, (exists) => {
         if (exists) {
@@ -129,4 +120,17 @@ addPresentationSelector.forEach((code) => {
             fs.copyFileSync(`./img-apple-160/${code}.png`, `./img-apple-160/${code}-fe0f.png`);
         }
     });
+});
+
+fs.readdirSync(normalFolder).forEach(file => {
+    if (file.match(vs16RegExp) !== null) {
+        console.log(file)
+        fs.copyFileSync(`${normalFolder}/${file}`, `${normalFolder}/${file.replace(vs16RegExp, '')}`);
+    }
+});
+
+fs.readdirSync(hqFolder).forEach(file => {
+    if (file.match(vs16RegExp)) {
+        fs.copyFileSync(`${hqFolder}/${file}`, `${hqFolder}/${file.replace(vs16RegExp, '')}`);
+    }
 });
