@@ -75,7 +75,7 @@ const emojis = data.reduce((result, emoji) => {
 delete emojis.categoryId;
 
 const json = emojis.categories.reduce((result, category) => {
-    result.push([category.id, category.name]);
+    result.push([category.id, [category.name]]);
     result.push(category.emojis.map((id) => {
         const emoji = emojis.emojis[id];
 
