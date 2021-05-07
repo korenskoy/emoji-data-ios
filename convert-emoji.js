@@ -81,7 +81,7 @@ const json = emojis.categories.reduce((result, category) => {
 
         return [
             emoji.unified,
-            emoji.short_name,
+            emoji.short_names,
         ];
     }));
 

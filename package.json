@@ -1,6 +1,6 @@
 {
   "name": "emoji-data-ios",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Emoji data and images for Telegram-T",
   "main": "emoji-data.json",
   "scripts": {
