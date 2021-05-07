@@ -83,7 +83,7 @@ const json = emojis.categories.reduce((result, category) => {
 
         return [
             emoji.unified,
-            suggestionData[native] || emoji.short_names,
+            [ ...new Set([emoji.short_name, ...(suggestionData[native] || [])])],
         ];
     }));
 
