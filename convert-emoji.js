@@ -1,5 +1,6 @@
 const fs = require('fs');
 const initialData = require('./initial-data.json');
+const suggestionData = require('emojilib');
 const data = require('./emoji.json').filter(emoji => {
     return initialData.categoryId[emoji.category] !== undefined || !emoji.has_img_apple
 });
@@ -78,10 +79,11 @@ const json = emojis.categories.reduce((result, category) => {
     result.push([category.id, [category.name]]);
     result.push(category.emojis.map((id) => {
         const emoji = emojis.emojis[id];
+        const native = unifiedToNative(emoji.unified);
 
         return [
             emoji.unified,
-            emoji.short_names,
+            suggestionData[native] || emoji.short_names,
         ];
     }));
 
@@ -133,3 +135,10 @@ fs.readdirSync(hqFolder).forEach(file => {
         fs.copyFileSync(`${hqFolder}/${file}`, `${hqFolder}/${file.replace(vs16RegExp, '')}`);
     }
 });
+
+function unifiedToNative(unified) {
+    const unicodes = unified.split('-');
+    const codePoints = unicodes.map((i) => parseInt(i, 16));
+
+    return String.fromCodePoint(...codePoints);
+}

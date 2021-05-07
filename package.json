@@ -1,6 +1,6 @@
 {
   "name": "emoji-data-ios",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Emoji data and images for Telegram-T",
   "main": "emoji-data.json",
   "scripts": {
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/korenskoy/emoji-data-ios/issues"
   },
-  "homepage": "https://github.com/korenskoy/emoji-data-ios"
+  "homepage": "https://github.com/korenskoy/emoji-data-ios",
+  "devDependencies": {
+    "emojilib": "^3.0.2"
+  }
 }
