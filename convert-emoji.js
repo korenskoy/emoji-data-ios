@@ -1,12 +1,14 @@
 const fs = require('fs');
 const initialData = require('./initial-data.json');
-const suggestionData = require('emojilib');
 const data = require('./emoji.json').filter(emoji => {
     return initialData.categoryId[emoji.category] !== undefined || !emoji.has_img_apple
 });
 const normalFolder = './img-apple-64';
 const hqFolder = './img-apple-160';
 const vs16RegExp = /-fe0f/g;
+const {
+    access, constants, copyFileSync, readdirSync,
+} = fs;
 
 const emojiPresentationSelectorForce = [
     '0023', '002a', '0030', '0031', '0032', '0033', '0034', '0035', '0036', '0037', '0038', '0039', '00a9', '00ae',
@@ -38,15 +40,7 @@ const emojiPresentationSelectorForce = [
     '1f6e5', '1f6e9', '1f6f0', '1f6f3',
 ];
 
-// https://unicodey.com/js-emoji/build/emoji-data/build/data_variations.txt
-const emojiPresentationSelectorInMiddleForce = [
-    '0023-fe0f-20e3', '002a-fe0f-20e3', '0030-fe0f-20e3', '0031-fe0f-20e3', '0032-fe0f-20e3', '0033-fe0f-20e3',
-    '0034-fe0f-20e3', '0035-fe0f-20e3', '0036-fe0f-20e3', '0037-fe0f-20e3', '0038-fe0f-20e3', '0039-fe0f-20e3',
-];
-
-const addPresentationSelector = [
-    '26a1'
-]
+const addPresentationSelector = ['26a1'];
 
 data.sort((a, b) => {
     const as = initialData.categoryId[a.category].position;
@@ -79,12 +73,8 @@ const json = emojis.categories.reduce((result, category) => {
     result.push([category.id, [category.name]]);
     result.push(category.emojis.map((id) => {
         const emoji = emojis.emojis[id];
-        const native = unifiedToNative(emoji.unified);
 
-        return [
-            emoji.unified,
-            [ ...new Set([emoji.short_name, ...(suggestionData[native] || [])])],
-        ];
+        return [emoji.unified, emoji.short_names];
     }));
 
     return result;
@@ -99,46 +89,39 @@ fs.writeFile('emoji-data.json', JSON.stringify(json), 'utf8', (err) => {
 });
 
 emojiPresentationSelectorForce.forEach((code) => {
-    fs.exists(`./img-apple-64/${code}-fe0f.png`, (exists) => {
-        if (exists) {
-            fs.copyFileSync(`./img-apple-64/${code}-fe0f.png`, `./img-apple-64/${code}.png`);
+    access(`./img-apple-64/${code}-fe0f.png`, constants.F_OK | constants.W_OK, (err) => {
+        if (!err) {
+            copyFileSync(`./img-apple-64/${code}-fe0f.png`, `./img-apple-64/${code}.png`);
         }
     });
-    fs.exists(`./img-apple-160/${code}-fe0f.png`, (exists) => {
-        if (exists) {
-            fs.copyFileSync(`./img-apple-160/${code}-fe0f.png`, `./img-apple-160/${code}.png`);
+    access(`./img-apple-160/${code}-fe0f.png`, constants.F_OK | constants.W_OK, (err) => {
+        if (!err) {
+            copyFileSync(`./img-apple-160/${code}-fe0f.png`, `./img-apple-160/${code}.png`);
         }
     });
 });
 
 addPresentationSelector.forEach((code) => {
-    fs.exists(`./img-apple-64/${code}.png`, (exists) => {
-        if (exists) {
-            fs.copyFileSync(`./img-apple-64/${code}.png`, `./img-apple-64/${code}-fe0f.png`);
+    access(`./img-apple-64/${code}.png`, constants.F_OK | constants.W_OK, (err) => {
+        if (!err) {
+            copyFileSync(`./img-apple-64/${code}.png`, `./img-apple-64/${code}-fe0f.png`);
         }
     });
-    fs.exists(`./img-apple-160/${code}.png`, (exists) => {
-        if (exists) {
-            fs.copyFileSync(`./img-apple-160/${code}.png`, `./img-apple-160/${code}-fe0f.png`);
+    access(`./img-apple-160/${code}.png`, constants.F_OK | constants.W_OK, (err) => {
+        if (!err) {
+            copyFileSync(`./img-apple-160/${code}.png`, `./img-apple-160/${code}-fe0f.png`);
         }
     });
 });
 
-fs.readdirSync(normalFolder).forEach(file => {
+readdirSync(normalFolder).forEach(file => {
     if (file.match(vs16RegExp) !== null) {
-        fs.copyFileSync(`${normalFolder}/${file}`, `${normalFolder}/${file.replace(vs16RegExp, '')}`);
+        copyFileSync(`${normalFolder}/${file}`, `${normalFolder}/${file.replace(vs16RegExp, '')}`);
     }
 });
 
-fs.readdirSync(hqFolder).forEach(file => {
+readdirSync(hqFolder).forEach(file => {
     if (file.match(vs16RegExp)) {
-        fs.copyFileSync(`${hqFolder}/${file}`, `${hqFolder}/${file.replace(vs16RegExp, '')}`);
+        copyFileSync(`${hqFolder}/${file}`, `${hqFolder}/${file.replace(vs16RegExp, '')}`);
     }
 });
-
-function unifiedToNative(unified) {
-    const unicodes = unified.split('-');
-    const codePoints = unicodes.map((i) => parseInt(i, 16));
-
-    return String.fromCodePoint(...codePoints);
-}
