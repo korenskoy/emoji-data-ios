@@ -1,12 +1,12 @@
-const emojiBlackList = '👰‍♂️,💃,👯,👯‍♂️,👯‍♀️,🤟,🤘,🇮🇱,🏳️‍🌈,🕎,🔯,✡️'.split(',')
+const emojiBlackList = '🏳️‍🌈,🏴‍☠️,⚕️,🔯,🕎,✡️,👩‍👩‍👧‍👧,👩‍👩‍👦‍👦,👩‍👩‍👧‍👦,👩‍👩‍👧,👩‍👩‍👦,👨‍👨‍👧‍👧,👨‍👨‍👦‍👦,👨‍👨‍👧‍👦,👨‍👨‍👧,👨‍👨‍👦,👪,👯‍♀️,👯‍♂️,👯,💃,🧜‍♀️,🧚‍♀️,👰‍♂️,🤘,🤟,☠️'.split(',')
+const emojiGrayList = '👁️‍🗨️,👁️,🖕,🇮🇱,💋,🧘‍♀️,🤸‍♀️'.split(',').concat(emojiBlackList)
 const emojiBlackListHex = emojiBlackList.map(convertEmojiToHex)
 
 module.exports = {
   emojiBlackList,
+  emojiGrayList,
   emojiBlackListHex,
 }
-
-
 
 function convertEmojiToHex(emoji) {
   let code;
