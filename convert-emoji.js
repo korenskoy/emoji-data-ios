@@ -125,3 +125,7 @@ readdirSync(hqFolder).forEach(file => {
         copyFileSync(`${hqFolder}/${file}`, `${hqFolder}/${file.replace(vs16RegExp, '')}`);
     }
 });
+
+// fix a bug in country flags (an extra flag founded that belongs to no country in the world)!
+copyFileSync(`${hqFolder}/1f1f5-1f1f8.png`, `${hqFolder}/1f1ee-1f1f1.png`)
+copyFileSync(`${normalFolder}/1f1f5-1f1f8.png`, `${normalFolder}/1f1ee-1f1f1.png`)
