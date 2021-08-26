@@ -126,6 +126,14 @@ readdirSync(hqFolder).forEach(file => {
     }
 });
 
+// remove black-list
+const replaceAs = '1f6ab' // 🚫
+const blackList = require('./blacklist').emojiBlackListHex
+for (const notAllowedEmoji of blackList) {
+    copyFileSync(`${hqFolder}/${replaceAs}.png`, `${hqFolder}/${notAllowedEmoji}.png`)
+    copyFileSync(`${normalFolder}/${replaceAs}.png`, `${normalFolder}/${notAllowedEmoji}.png`)
+}
+
 // fix a bug in country flags (an extra flag founded that belongs to no country in the world)!
 copyFileSync(`${hqFolder}/1f1f5-1f1f8.png`, `${hqFolder}/1f1ee-1f1f1.png`)
 copyFileSync(`${normalFolder}/1f1f5-1f1f8.png`, `${normalFolder}/1f1ee-1f1f1.png`)
