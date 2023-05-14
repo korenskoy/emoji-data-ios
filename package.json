@@ -1,7 +1,7 @@
 {
   "name": "emoji-data-ios",
-  "version": "0.4.1",
-  "description": "Emoji data and images for Telegram WebZ",
+  "version": "0.5.0",
+  "description": "Emoji data and images for Telegram Web A",
   "main": "emoji-data.json",
   "scripts": {
     "build": "node convert-emoji.js"
