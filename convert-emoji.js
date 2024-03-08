@@ -40,6 +40,14 @@ const emojiPresentationSelectorForce = [
     '1f6e5', '1f6e9', '1f6f0', '1f6f3',
 ];
 
+const blockList = new Set([
+    'man-woman-girl', 'man-woman-boy-boy', 'man-woman-girl-girl', 'man-man-boy', 'man-man-girl', 'man-man-girl-boy',
+    'man-man-boy-boy', 'man-man-girl-girl', 'woman-woman-boy', 'woman-woman-girl', 'woman-woman-girl-boy',
+    'woman-woman-boy-boy', 'woman-woman-girl-girl', 'man-boy', 'man-boy-boy', 'man-girl', 'man-girl-boy',
+    'man-girl-girl', 'woman-boy-boy', 'woman-girl', 'woman-girl-girl', 'family', 'family_adult_adult_child',
+    'family_adult_adult_child_child', 'family_adult_child', 'family_adult_child_child'
+])
+
 const addPresentationSelector = ['26a1'];
 
 data.sort((a, b) => {
@@ -54,6 +62,8 @@ data.sort((a, b) => {
 });
 
 const emojis = data.reduce((result, emoji) => {
+    if (blockList.has(emoji.short_name)) return result;
+
     const categoryUid = emoji.category;
 
     if (!result.categoryId[categoryUid]) {
