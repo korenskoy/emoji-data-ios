@@ -2,6 +2,14 @@
   "name": "emoji-data-ios",
   "version": "0.5.3",
   "description": "Emoji data and images for Telegram Web A",
+  "files": [
+    "convert-emoji.js",
+    "emoji-data.json",
+    "emoji.json",
+    "img-apple-160/",
+    "img-apple-64/",
+    "initial-data.json"
+  ],
   "main": "emoji-data.json",
   "scripts": {
     "build": "node convert-emoji.js"
