@@ -99,27 +99,27 @@ fs.writeFile('emoji-data.json', JSON.stringify(json), 'utf8', (err) => {
 });
 
 emojiPresentationSelectorForce.forEach((code) => {
-    access(`./img-apple-64/${code}-fe0f.png`, constants.F_OK | constants.W_OK, (err) => {
+    access(`./img-apple-64/${code}-fe0f.avif`, constants.F_OK | constants.W_OK, (err) => {
         if (!err) {
-            copyFileSync(`./img-apple-64/${code}-fe0f.png`, `./img-apple-64/${code}.png`);
+            copyFileSync(`./img-apple-64/${code}-fe0f.avif`, `./img-apple-64/${code}.avif`);
         }
     });
-    access(`./img-apple-160/${code}-fe0f.png`, constants.F_OK | constants.W_OK, (err) => {
+    access(`./img-apple-160/${code}-fe0f.avif`, constants.F_OK | constants.W_OK, (err) => {
         if (!err) {
-            copyFileSync(`./img-apple-160/${code}-fe0f.png`, `./img-apple-160/${code}.png`);
+            copyFileSync(`./img-apple-160/${code}-fe0f.avif`, `./img-apple-160/${code}.avif`);
         }
     });
 });
 
 addPresentationSelector.forEach((code) => {
-    access(`./img-apple-64/${code}.png`, constants.F_OK | constants.W_OK, (err) => {
+    access(`./img-apple-64/${code}.avif`, constants.F_OK | constants.W_OK, (err) => {
         if (!err) {
-            copyFileSync(`./img-apple-64/${code}.png`, `./img-apple-64/${code}-fe0f.png`);
+            copyFileSync(`./img-apple-64/${code}.avif`, `./img-apple-64/${code}-fe0f.avif`);
         }
     });
-    access(`./img-apple-160/${code}.png`, constants.F_OK | constants.W_OK, (err) => {
+    access(`./img-apple-160/${code}.avif`, constants.F_OK | constants.W_OK, (err) => {
         if (!err) {
-            copyFileSync(`./img-apple-160/${code}.png`, `./img-apple-160/${code}-fe0f.png`);
+            copyFileSync(`./img-apple-160/${code}.avif`, `./img-apple-160/${code}-fe0f.avif`);
         }
     });
 });

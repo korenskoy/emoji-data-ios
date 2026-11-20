@@ -1,6 +1,6 @@
 {
   "name": "emoji-data-ios",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "Emoji data and images for Telegram Web A",
   "files": [
     "convert-emoji.js",
@@ -12,7 +12,8 @@
   ],
   "main": "emoji-data.json",
   "scripts": {
-    "build": "node convert-emoji.js"
+    "build": "node convert-emoji.js",
+    "convert:avif": "node convert-to-avif.js"
   },
   "repository": {
     "type": "git",
@@ -27,5 +28,7 @@
     "url": "https://github.com/korenskoy/emoji-data-ios/issues"
   },
   "homepage": "https://github.com/korenskoy/emoji-data-ios",
-  "devDependencies": {}
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
 }
